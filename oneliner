@@ -1,0 +1,30 @@
+#!/bin/sh
+
+FOLDER=/tmp/oneliner
+CFILE=$FOLDER/file.c
+COMPILED=$FOLDER/compiled
+PIDFILE=$FOLDER/pid
+
+if [ $1 = "--kill" ]; then
+	PID=`cat $PIDFILE 2> /dev/null`
+	if [ $? = 0 ]; then
+		kill $PID
+		rm $PIDFILE
+	fi
+else
+	mkdir $FOLDER 2> /dev/null
+	
+	echo "main(i){" > $CFILE
+	echo "for(i=0;;i++)putchar(" >> $CFILE
+	echo $1 >> $CFILE
+	echo ");}" >> $CFILE
+
+	gcc $CFILE -o$COMPILED
+	if [ $? = 0 ]; then
+		chmod +x $COMPILED
+		
+		$0 --kill
+		$COMPILED | aplay - &
+		echo $! > $PIDFILE
+	fi
+fi
