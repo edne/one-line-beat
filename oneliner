@@ -21,7 +21,7 @@ else
 		chmod +x $COMPILED
 		
 		$0 --kill
-		$COMPILED | aplay - &
+		$COMPILED | aplay - 2> /dev/null &
 		echo $! > $PIDFILE
 	fi
 fi
