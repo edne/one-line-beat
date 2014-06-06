@@ -14,10 +14,7 @@ if [ $1 = "--kill" ]; then
 else
 	mkdir $FOLDER 2> /dev/null
 	
-	echo "main(i){" > $CFILE
-	echo "for(i=0;;i++)putchar(" >> $CFILE
-	echo $1 >> $CFILE
-	echo ");}" >> $CFILE
+	echo "main(i){for(i=0;;i++)putchar($1);}" > $CFILE
 
 	gcc $CFILE -o$COMPILED
 	if [ $? = 0 ]; then
