@@ -13,13 +13,13 @@ if [ $1 = "--kill" ] || [ $1 = "-k" ]; then
 	fi
 else
 	mkdir $FOLDER 2> /dev/null
-	
-	echo "main(i){for(i=0;;i++)putchar($1);}" > $CFILE
+
+	echo "main(t){for(t=0;;t++)putchar($1);}" > $CFILE
 
 	gcc $CFILE -o$COMPILED
 	if [ $? = 0 ]; then
 		chmod +x $COMPILED
-		
+
 		$0 --kill
 		$COMPILED | aplay - 2> /dev/null &
 		echo $! > $PIDFILE
