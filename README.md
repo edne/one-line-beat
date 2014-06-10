@@ -4,14 +4,13 @@ Generate and play sounds from single-line C code
 
 Usage
 -----
-`./oneliner i`
-
-`./oneliner i*2`
-
-`./oneliner i*(i>>2)`
-
-`./oneliner i*(i>>4)/3`
+    $ ./ol t
+    $ ./ol t*2
+    $ ./ol t*(t>>2)
+    $ ./ol t*(t>>8)&(t>>13)
 
 and so on...
 
-`./oneliner --kill`
+Than:
+
+    $ ./ol --kill  # or simply -k
